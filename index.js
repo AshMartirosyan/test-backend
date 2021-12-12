@@ -18,7 +18,6 @@ app.get("/", (req, res) => {
   res.send("Deployed");
 });
 
-//const HOSTNAME = "metioserver.herokuapp.com";
 const PORT = process.env.PORT || 8081;
 const dbURL =
   "mongodb+srv://test:test123123@cluster0.6y6lr.mongodb.net/test?retryWrites=true&w=majority";
