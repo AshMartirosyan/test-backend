@@ -14,11 +14,19 @@ app.use("/search", searchRouter);
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-const HOSTNAME = "localhost";
-const PORT = 8081;
-const dbURL = "mongodb://localhost:27017/local";
-const client = new MongoClient(dbURL);
-const database = client.db("admin");
+app.get("/", (req, res) => {
+  res.send("Deployed");
+});
+
+//const HOSTNAME = "metioserver.herokuapp.com";
+const PORT = process.env.PORT || 8081;
+const dbURL =
+  "mongodb+srv://test:test123123@cluster0.6y6lr.mongodb.net/test?retryWrites=true&w=majority";
+const client = new MongoClient(dbURL, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
+const database = client.db("test");
 export const collection = database.collection("searchedWords");
 
 // TO DO. add async
@@ -26,8 +34,8 @@ export const collection = database.collection("searchedWords");
   try {
     await client.connect();
 
-    app.listen(PORT, HOSTNAME, () => {
-      console.log(`Server running at http://${HOSTNAME}:${PORT}/`);
+    app.listen(PORT, () => {
+      console.log(`Server running on Port ${PORT}/`);
     });
   } catch (err) {
     client.close();
