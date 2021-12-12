@@ -25,6 +25,7 @@ const client = new MongoClient(dbURL, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
+
 const database = client.db("test");
 export const collection = database.collection("searchedWords");
 
